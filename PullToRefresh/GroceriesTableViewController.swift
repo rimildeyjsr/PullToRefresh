@@ -11,18 +11,24 @@ import UIKit
 class GroceriesTableViewController: UITableViewController {
 
     // MARK: - view did load
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.leftBarButtonItem = self.editButtonItem
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(segueToNewGrocery))
         self.refreshControl = pullToRefreshControl
         pullToRefreshControl.addTarget(self, action:
             #selector(refreshTable), for: .valueChanged)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
+    
     // MARK: - properties
+    
     let pullToRefreshControl = UIRefreshControl()
-    let model = Model()
+    
     
     // MARK: - functions
     
@@ -31,7 +37,13 @@ class GroceriesTableViewController: UITableViewController {
         self.tableView.reloadData() 
         pullToRefreshControl.endRefreshing()
     }
+    
+    func segueToNewGrocery() {
+        performSegue(withIdentifier: "sequeToNewGrocery", sender: self)
+    }
 
+    
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {

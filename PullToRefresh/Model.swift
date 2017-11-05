@@ -8,6 +8,8 @@
 
 import Foundation
 
+let model = Model()
+
 class Model {
     
     var data = ["milk","eggs","lemon","ice cream"]
